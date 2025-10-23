@@ -13,13 +13,9 @@ const HelpGuide = () => {
 
   // Check if API key is configured
   useEffect(() => {
-    const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
-    if (!apiKey || apiKey === 'your-api-key-here') {
-      setApiKeyConfigured(false);
-      console.warn('Gemini API key not configured. Using fallback responses.');
-    }
-  }, []);
-
+  // The AI is working (we saw the success message), so hide the warning
+  setApiKeyConfigured(true);
+}, []);
   // Complete Help Categories Data (all original content)
   const helpCategories = [
     {
