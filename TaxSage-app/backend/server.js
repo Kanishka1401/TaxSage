@@ -27,7 +27,6 @@ app.use(express.json({ limit: '10mb' })); // Increase payload limit if needed
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // --- Security Middleware ---
-// Add security headers
 app.use((req, res, next) => {
     res.header('X-Content-Type-Options', 'nosniff');
     res.header('X-Frame-Options', 'DENY');
@@ -39,16 +38,12 @@ app.use((req, res, next) => {
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect(process.env.MONGO_URI, {
-            // Add connection options for better stability
-            // useNewUrlParser: true, // No longer needed in Mongoose 6+
-            // useUnifiedTopology: true, // No longer needed in Mongoose 6+
-            serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
-            socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
         });
         
         console.log(`MongoDB Connected: ${conn.connection.host}`);
         
-        // Handle MongoDB connection events
         mongoose.connection.on('error', (err) => {
             console.error('MongoDB connection error:', err);
         });
@@ -57,7 +52,6 @@ const connectDB = async () => {
             console.log('MongoDB disconnected');
         });
         
-        // Graceful shutdown
         process.on('SIGINT', async () => {
             await mongoose.connection.close();
             console.log('MongoDB connection closed through app termination');
@@ -74,7 +68,6 @@ connectDB();
 
 // --- Request Logging Middleware ---
 app.use((req, res, next) => {
-    // Don't log health checks in production to reduce noise
     if (process.env.NODE_ENV === 'production' && req.path === '/health') {
         return next();
     }
@@ -98,7 +91,6 @@ app.get('/', (req, res) => {
 });
 
 // --- Health Check Route ---
-// This is great for deployment platforms to know your app is live
 app.get('/health', (req, res) => {
     const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
     res.status(200).json({
@@ -121,7 +113,6 @@ app.use('*', (req, res) => {
 app.use((err, req, res, next) => {
     console.error('Unhandled Error:', err);
     
-    // Mongoose validation error
     if (err.name === 'ValidationError') {
         return res.status(400).json({
             success: false,
@@ -130,7 +121,6 @@ app.use((err, req, res, next) => {
         });
     }
     
-    // Mongoose duplicate key error
     if (err.code === 11000) {
         const field = Object.keys(err.keyValue)[0];
         return res.status(400).json({
@@ -139,7 +129,6 @@ app.use((err, req, res, next) => {
         });
     }
     
-    // JWT errors
     if (err.name === 'JsonWebTokenError') {
         return res.status(401).json({
             success: false,
@@ -154,7 +143,6 @@ app.use((err, req, res, next) => {
         });
     }
     
-    // Default error
     res.status(err.status || 500).json({
         success: false,
         message: err.message || 'Internal Server Error',
@@ -165,7 +153,6 @@ app.use((err, req, res, next) => {
 // --- Handle Unhandled Promise Rejections ---
 process.on('unhandledRejection', (err, promise) => {
     console.log('Unhandled Promise Rejection:', err);
-    // Close server & exit process
     server.close(() => {
         process.exit(1);
     });
@@ -179,10 +166,10 @@ process.on('uncaughtException', (err) => {
 
 // --- Server Listener ---
 const PORT = process.env.PORT || 5001;
-const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
 
-const server = app.listen(PORT, HOST, () => {
-    console.log(`🚀 Server is running in ${process.env.NODE_ENV || 'development'} mode on http://${HOST}:${PORT}`);
+// ✅ Always bind to 0.0.0.0 for Render compatibility
+const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
     console.log(`Database: MongoDB ${mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'}`);
 });
 
