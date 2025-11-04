@@ -35,7 +35,7 @@ TaxSage is a full-stack MERN application designed to simplify the tax filing pro
 ---
 
 ## 📁 Project Structure
-/taxsage-project
+<pre>/taxsage-project
 ├── /client
 │   ├── /src
 │   │   ├── /assets
@@ -87,7 +87,7 @@ TaxSage is a full-stack MERN application designed to simplify the tax filing pro
     ├── .env
     ├── package.json
     └── server.js
-
+    </pre>
 ---
 
 ## Getting Started
@@ -175,31 +175,31 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 ### 4. API Endpoints
 
 ### Authentication
-POST /api/auth/register: Register a new user.
-POST /api/auth/login: Log in as a user.
-POST /api/ca/auth/register: Register a new CA.
-POST /api/ca/auth/login: Log in as a CA.
+* `POST /api/auth/register`: Register a new user.
+* `POST /api/auth/login`: Log in as a user.
+* `POST /api/ca/auth/register`: Register a new CA.
+* `POST /api/ca/auth/login`: Log in as a CA.
 
 ### Tax Filings (User)
-POST /api/tax/start-filing: Create a new tax filing for the year.
-GET /api/tax/my-filings: Get all filings for the logged-in user.
-GET /api/tax/filing: Get the user's primary (most recent) filing.
-PUT /api/tax/update-filing/:id: Update a specific tax filing.
-POST /api/tax/:id/invite-ca: Send a review request to a CA.
+* `POST /api/tax/start-filing`: Create a new tax filing for the year.
+* `GET /api/tax/my-filings`: Get all filings for the logged-in user.
+* `GET /api/tax/filing`: Get the user's primary (most recent) filing.
+* `PUT /api/tax/update-filing/:id`: Update a specific tax filing.
+* `POST /api/tax/:id/invite-ca`: Send a review request to a CA.
 
 ### Document Management (User)
-GET /api/documents: Get all of the user's uploaded documents.
-POST /api/documents: Upload a new document (metadata).
-DELETE /api/documents/:id: Delete a specific document.
+* `GET /api/documents`: Get all of the user's uploaded documents.
+* `POST /api/documents`: Upload a new document (metadata).
+* `DELETE /api/documents/:id`: Delete a specific document.
 
 ### CA & Requests (User)
-GET /api/ca/search: Search for CAs based on filters.
-POST /api/ca-requests: Send a new service request to a CA.
+* `GET /api/ca/search`: Search for CAs based on filters.
+* `POST /api/ca-requests`: Send a new service request to a CA.
 
 ### CA (Chartered Accountant)
-PUT /api/ca/profile: Update the logged-in CA's profile.
-GET /api/ca/dashboard: Get dashboard stats for the logged-in CA.
-GET /api/tax/review/:id: Get a specific filing for review (CA only).
-POST /api/tax/review/:id: Submit a review (comments, approve, reject) for a filing.
-GET /api/ca-requests: Get all requests sent to the logged-in CA.
-PUT /api/ca-requests/:id: Update a request (accept, reject, complete).
+* `PUT /api/ca/profile`: Update the logged-in CA's profile.
+* `GET /api/ca/dashboard`: Get dashboard stats for the logged-in CA.
+* `GET /api/tax/review/:id`: Get a specific filing for review (CA only).
+* `POST /api/tax/review/:id`: Submit a review (comments, approve, reject) for a filing.
+* `GET /api/ca-requests`: Get all requests sent to the logged-in CA.
+* `PUT /api/ca-requests/:id`: Update a request (accept, reject, complete).
