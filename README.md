@@ -1,10 +1,10 @@
-# 🤖 TaxSage: AI-Powered Tax Filing Platform
+# TaxSage: AI-Powered Tax Filing Platform
 
 TaxSage is a full-stack MERN application designed to simplify the tax filing process. It connects users with Chartered Accountants (CAs) by using AI to pre-fill tax forms from uploaded documents (like Form-16), which CAs can then review, comment on, and approve.
 
-## ✨ Key Features
+## Key Features
 
-### 👤 For Users
+### For Users
 * **AI Form-16 Upload:** Automatically extracts and populates tax filing forms by reading data from Form-16 PDFs.
 * **Step-by-Step Filing:** A guided, multi-step process for personal info, income, deductions, and final review.
 * **User Dashboard:** A central hub to track filing status, manage documents, and see key stats.
@@ -13,7 +13,7 @@ TaxSage is a full-stack MERN application designed to simplify the tax filing pro
 * **Tax Calculator:** A simple tool to estimate tax liability under old vs. new regimes.
 * **AI Help Guide:** An integrated AI chatbot (powered by Gemini) to answer tax-related questions.
 
-### 💼 For Chartered Accountants (CAs)
+### For Chartered Accountants (CAs)
 * **CA Dashboard:** A specialized dashboard to view assigned clients, pending reviews, and revenue stats.
 * **Client Management:** A complete list of all assigned clients and their filing statuses.
 * **Filing Review System:** A dedicated interface to review a client's auto-filled data, add comments, and approve or request changes.
@@ -22,7 +22,7 @@ TaxSage is a full-stack MERN application designed to simplify the tax filing pro
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 | Category | Technology |
 | :--- | :--- |
@@ -34,7 +34,7 @@ TaxSage is a full-stack MERN application designed to simplify the tax filing pro
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 <pre>/taxsage-project
 ├── /client
 │   ├── /src
